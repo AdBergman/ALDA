@@ -1,0 +1,95 @@
+
+Optimization #1 Removing duplicate from HashSet when searching for the Node in MyUndirectedGraph
+Line 109 & 110:
+                    tempSet.removeAll(allCheckedNodes);
+                    allCheckedNodes.addAll(tempSet);
+
+With previouslyChecked
+----------------------
+
+Graph stats
+Nodes: 816109
+Edges: 19034188
+Took 0 ms
+Bacon Number Bacon: 0
+Took 3102 ms
+Bacon Number Irene: 3
+Took 6369 ms
+Bacon Number Azucena, Veronica: 4
+Took 138 ms
+Bacon Number Azucena, Ayeena: 2
+
+Graph stats
+Nodes: 816109
+Edges: 19034188
+Took 0 ms
+Bacon Number Bacon: 0
+Took 2855 ms
+Bacon Number Irene: 3
+Took 5786 ms
+Bacon Number Azucena, Veronica: 4
+Took 118 ms
+Bacon Number Azucena, Ayeena: 2
+
+Graph stats
+Nodes: 816109
+Edges: 19034188
+Took 0 ms
+Bacon Number Bacon: 0
+Took 3052 ms
+Bacon Number Irene: 3
+Took 6551 ms
+Bacon Number Azucena, Veronica: 4
+Took 114 ms
+Bacon Number Azucena, Ayeena: 2
+
+Graph stats
+Nodes: 816109
+Edges: 19034188
+Took 0 ms
+Bacon Number Bacon: 0
+Took 8252 ms
+Bacon Number Irene: 3
+Took 5093 ms
+Bacon Number Azucena, Veronica: 4
+Took 86 ms
+Bacon Number Azucena, Ayeena: 2
+
+
+Without previouslychecked
+-------------------------
+Graph stats
+Nodes: 816109
+Edges: 19034188
+Took 0 ms
+Bacon Number Bacon: 0
+Took 2698 ms
+Bacon Number Irene: 3
+Took 8295 ms
+Bacon Number Azucena, Veronica: 4
+Took 88 ms
+Bacon Number Azucena, Ayeena: 2
+
+Graph stats
+Nodes: 816109
+Edges: 19034188
+Took 0 ms
+Bacon Number Bacon: 0
+Took 2908 ms
+Bacon Number Irene: 3
+Took 9339 ms
+Bacon Number Azucena, Veronica: 4
+Took 102 ms
+Bacon Number Azucena, Ayeena: 2
+
+Graph stats
+Nodes: 816109
+Edges: 19034188
+Took 0 ms
+Bacon Number Bacon: 0
+Took 2951 ms
+Bacon Number Irene: 3
+Took 15499 ms
+Bacon Number Azucena, Veronica: 4
+Took 85 ms
+Bacon Number Azucena, Ayeena: 2
