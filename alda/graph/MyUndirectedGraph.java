@@ -36,9 +36,7 @@ public class MyUndirectedGraph<E> implements UndirectedGraph<E> {
             return false;
         }
         totalEdges++;
-        nodeObj1.connectNode(nodeObj2);
-        //nodeObj2.connectNode(nodeObj1);  //Will iterate through all nodes and connect so bi-directional is not necessary.
-        return true;
+        return nodeObj1.connectNode(nodeObj2);    //Will iterate through all nodes and connect so bi-directional is not necessary.
     }
 
     @Override
@@ -47,9 +45,7 @@ public class MyUndirectedGraph<E> implements UndirectedGraph<E> {
             return false;
         }
         totalEdges++;
-        nodeObj1.connectNode(nodeObj2);
-        //nodeObj2.connectNode(nodeObj1);  //Will iterate through all nodes and connect so bi-directional is not necessary.
-        return true;
+        return nodeObj1.connectNode(nodeObj2); //Will iterate through all nodes and connect so bi-directional is not necessary.
     }
 
     @Override

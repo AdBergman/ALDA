@@ -6,15 +6,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class GraphBuilder {
-    MyUndirectedGraph<String> graph;
-    HashMap<String, HashSet<String>> creditMap;
+    private MyUndirectedGraph<String> graph;
+    private HashMap<String, HashSet<String>> creditMap;
 
     public void buildGraph(MyUndirectedGraph graph) {
         creditMap = new HashMap<>();
         this.graph = graph;
         parseFileToNodesAndMap();
         connectAllNodes();
-        //graphTests();
     }
 
     private void parseFileToNodesAndMap() {
@@ -78,12 +77,12 @@ public class GraphBuilder {
     }
 
     private void connectAllNodes() {
-        HashSet<String> credits;                                                   //Note: A Node can not Link itself.
-        for (UndirectedGraphNode<String> actorNode : graph.getAllNodes()) {                 //For every Actor Node
-            credits = new HashSet<>(actorNode.getCredits());                                       //Get the  Actor Node credit Set
-            for (String credit : credits) {                                        //For every Actor Note Credit in Set
-                for (String actor : creditMap.get(credit)) {                       //Iterate through Central Credits Map that contains List of Actors
-                    graph.connectNodes(actorNode, graph.getNode(actor));                 //Link Actor Node to All Actor Nodes sharing same Credit
+        HashSet<String> credits;                                                    //Note: A Node can not Link itself.
+        for (UndirectedGraphNode<String> actorNode : graph.getAllNodes()) {         //For every Actor Node
+            credits = new HashSet<>(actorNode.getCredits());                        //Get the  Actor Node credit Set
+            for (String credit : credits) {                                         //For every Actor Note Credit in Set
+                for (String actor : creditMap.get(credit)) {                         //Iterate through Central Credits Map that contains List of Actors
+                    graph.connectNodes(actorNode, graph.getNode(actor));             //Link Actor Node to All Actor Nodes sharing same Credit
                 }
             }
         }
@@ -94,24 +93,4 @@ public class GraphBuilder {
         return creditMap.toString();
     }
 
-   /* private void graphTests() throws NullPointerException{
-        System.out.println("\nGraph stats");
-        System.out.println("Nodes: " + graph.getNumberOfNodes());
-        System.out.println("Edges: " + graph.getNumberOfEdges());
-
-        System.out.println("Bacon Number Bacon: " + graph.breadthFirstSearch("Bacon, Kevin", "Bacon, Kevin").get(0));
-        System.out.println("Bacon Number Irene: " + graph.breadthFirstSearch("Bacon, Kevin", "Abadi, Maria").get(0));
-        System.out.println("Bacon Number Azucena, Veronica: " + graph.breadthFirstSearch("Bacon, Kevin", "Azucena, Veronica").get(0));
-        System.out.println("Bacon Number Azucena, Ayeena: " + graph.breadthFirstSearch("Bacon, Kevin", "Azucena, Ayeena").get(0));
-
-       System.out.println("\nName: " + graph.getNode("De Paula, Tilde").getData());
-        System.out.println("Node: " + graph.getNode("De Paula, Tilde"));
-        System.out.println("Connected: " + graph.getNode("De Paula, Tilde").getConnectedNodes());
-        for (UndirectedGraphNode<String> costar : graph.getNode("De Paula, Tilde").getConnectedNodes()){
-            System.out.println(costar.getData());
-            if (costar.getData().equals("Dilba")){
-                System.out.println("Found!");
-            }
-        }
-    }*/
 }

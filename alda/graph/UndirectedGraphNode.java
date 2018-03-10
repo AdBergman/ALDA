@@ -8,13 +8,12 @@ public class UndirectedGraphNode<E> {
         private HashSet<String> credits;
         private Set<UndirectedGraphNode<E>> connectedNodes;
 
-    private boolean visited;
 
         public UndirectedGraphNode(E data) {
             this.data = data;
             credits = new HashSet<>();
             connectedNodes = new HashSet<>();
-            this.visited = false;
+
         }
 
         public boolean isConnected(UndirectedGraphNode<E> otherNode){
@@ -41,13 +40,5 @@ public class UndirectedGraphNode<E> {
             return connectedNodes;
         }
 
-
-    public boolean isVisited() {
-        return visited;
-    }
-
-    public void setVisited(boolean visited) {
-        this.visited = visited;
-    }
 
 }
