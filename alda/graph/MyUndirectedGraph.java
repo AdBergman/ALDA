@@ -55,26 +55,17 @@ public class MyUndirectedGraph<E> implements UndirectedGraph<E> {
 
 
     @Override
-    public List<String> breadthFirstSearch(E start, E end) {
+    public int breadthFirstSearch(E start, E end) {
         long startTime = System.currentTimeMillis();
         boolean found = false;
         int baconNumber = 0;
-        List<String> listOfResults = new ArrayList<>();
-        listOfResults.add("" + baconNumber);
         UndirectedGraphNode<E> startNode = getNode(start);
         UndirectedGraphNode<E> endNode = getNode(end);
 
-        if (!mapOfNodes.containsKey(start)) {
-            listOfResults.set(0, start + " not found in text file.");
-            return listOfResults;
-        } else if (!mapOfNodes.containsKey(end)) {
-            listOfResults.set(0, end + " not found in text file.");
-            return listOfResults;
-
-        } else if (startNode == endNode) {
+         if (startNode == endNode) {
             long endTime = System.currentTimeMillis();
-            System.out.println("Took "+(endTime - startTime) + " ms");
-            return listOfResults;
+            System.out.println("BFS:  "+(endTime - startTime) + " ms");
+            return baconNumber;
         } else {
             Set<UndirectedGraphNode<E>> toSearch = new HashSet<>(startNode.getConnectedNodes());
             Set<UndirectedGraphNode<E>> tempSet = new HashSet<>();
@@ -98,10 +89,9 @@ public class MyUndirectedGraph<E> implements UndirectedGraph<E> {
             }
 
         }
-        listOfResults.set(0, "" + baconNumber);
         long endTime = System.currentTimeMillis();
-        System.out.println("Took "+(endTime - startTime) + " ms");
-        return listOfResults;       //TODO: this list only contains Kevin Bacon number.
+        System.out.println("BFS:  "+(endTime - startTime) + " ms");
+        return baconNumber;       //TODO: this list only contains Kevin Bacon number.
     }
 
     public boolean addCredit(E node1, String production) {
@@ -119,7 +109,6 @@ public class MyUndirectedGraph<E> implements UndirectedGraph<E> {
             System.out.println("No such node found: " + node1 + "\nError: " + e);
         }
         return null;
-
     }
 
     public boolean contains(String actorName){

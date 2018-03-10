@@ -70,7 +70,7 @@ public interface UndirectedGraph<T> {
 	 * @return en lista över alla noder på vägen mellan start- och slutnoden. Om
 	 *         ingen väg finns är listan tom.
 	 */
-	List<String> breadthFirstSearch(T start, T end);
+	int breadthFirstSearch(T start, T end);
 
 	/**
 	 * Returnerar en ny graf som utgär ett minimalt spännande träd till grafen.
