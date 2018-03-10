@@ -10,10 +10,13 @@ public class GraphBuilder {
     private HashMap<String, HashSet<String>> creditMap;
 
     public void buildGraph(MyUndirectedGraph graph) {
+        long startTime = System.currentTimeMillis();
         creditMap = new HashMap<>();
         this.graph = graph;
         parseFileToNodesAndMap();
         connectAllNodes();
+        long endTime = System.currentTimeMillis();
+        System.out.println("Graph build time: "+(endTime - startTime) + " ms");
     }
 
     private void parseFileToNodesAndMap() {
@@ -88,9 +91,10 @@ public class GraphBuilder {
         }
     }
 
-    @Override
+//CreditMap skall tas bort?
+/*    @Override
     public String toString() {
         return creditMap.toString();
-    }
+    }*/
 
 }

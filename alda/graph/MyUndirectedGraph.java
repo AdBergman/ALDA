@@ -5,8 +5,6 @@ import java.util.*;
 public class MyUndirectedGraph<E> implements UndirectedGraph<E> {
     private int totalEdges = 0;
     private Map<E, UndirectedGraphNode<E>> mapOfNodes = new HashMap<>();
-    private boolean found = false;
-    private int baconNumber = 0;
 
 
     @Override

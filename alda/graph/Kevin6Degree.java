@@ -3,16 +3,27 @@ package alda.graph;
 import java.util.Scanner;
 
 public class Kevin6Degree {
+    private MyUndirectedGraph<String> graph = new MyUndirectedGraph<>();
+    private GraphBuilder gb = new GraphBuilder();
+
     public static void main(String[] args) {
+        Kevin6Degree k6d = new Kevin6Degree();
+        k6d.go();
+    }
+
+    private void go() {
+        System.out.println("Kevin Bacon Program");
+        System.out.println(" -----Loading----- ");
+
+        gb.buildGraph(graph);
+        gb = new GraphBuilder();                //This should allow GarbageCollector to free up some memory.
+        System.out.println(graph);
+        menu();
+    }
+
+    private void menu() {
         boolean run = true;
         Scanner in = new Scanner(System.in);
-        System.out.println("Kevin Bacon Program");
-        System.out.println("-------------Loading-----------");
-        MyUndirectedGraph<String> graph = new MyUndirectedGraph<>();
-         GraphBuilder gb = new GraphBuilder();
-         gb.buildGraph(graph);
-        System.out.println(graph);
-
         while (run) {
             System.out.println("Commands: ");
             System.out.println("N - Give an actors name and find its' Bacon-number");
@@ -33,7 +44,7 @@ public class Kevin6Degree {
                     System.out.println("Please enter the second actor's first name: ");
                     String firstNameTwo = normalizeName(in.nextLine());
                     String actorNameTwo = lastNameTwo + ", " + firstNameTwo;
-                    findKevinBaconNumberBetweenTwo(actorNameOne, actorNameTwo, graph);
+                    findKevinBaconNumberBetweenTwo(actorNameOne, actorNameTwo);
                     break;
 
                 case "n":
@@ -44,12 +55,12 @@ public class Kevin6Degree {
                     String firstName = normalizeName(in.nextLine());
 
                     String actorName = lastName + ", " + firstName;
-                    findKevinBaconNumber(actorName, graph);
+                    findKevinBaconNumber(actorName);
                     break;
 
                 case "x":
                     System.out.println("Good bye!");
-                    System.exit(0);
+                    run = false;
                     break;
 
                 default:
@@ -59,14 +70,16 @@ public class Kevin6Degree {
         }
     }
 
-    private static String normalizeName(String name) {
+    private String normalizeName(String name) {
         if (!name.isEmpty()) {
             name = name.trim();
+            name = name.toLowerCase();
+            name = name.substring(0, 1).toUpperCase() + name.substring(1); //capitalize first letter
         }
         return name;
     }
 
-    private static void findKevinBaconNumber(String actorName, MyUndirectedGraph<String> graph) {
+    private void findKevinBaconNumber(String actorName) {
 
         if (graph.contains(actorName)) {
             System.out.println("Kevin Bacon-number for " + actorName + " is: " + graph.breadthFirstSearch(actorName, "Bacon, Kevin"));
@@ -75,7 +88,7 @@ public class Kevin6Degree {
         }
     }
 
-    private static void findKevinBaconNumberBetweenTwo(String firstActorName, String secondActorName, MyUndirectedGraph<String> graph) {
+    private void findKevinBaconNumberBetweenTwo(String firstActorName, String secondActorName) {
         if (!graph.contains(firstActorName)) {
             System.out.println("Did not find " + firstActorName + " in the actor list");
         } else if (!graph.contains(secondActorName)) {
