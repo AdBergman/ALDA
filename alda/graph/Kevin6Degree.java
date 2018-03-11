@@ -21,6 +21,8 @@ public class Kevin6Degree {
         menu();
     }
 
+
+
     private void menu() {
         boolean run = true;
         Scanner in = new Scanner(System.in);
