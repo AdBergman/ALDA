@@ -19,7 +19,7 @@ public class MyUndirectedGraph<E> implements UndirectedGraph<E> {
 
     @Override
     public boolean add(E newNode) {
-        if (mapOfNodes.containsKey(newNode)) {
+        if (mapOfNodes.containsKey(newNode)) {                          //Does not allow duplicates
             return false;
         }
         mapOfNodes.put(newNode, new UndirectedGraphNode<>(newNode));
@@ -60,38 +60,41 @@ public class MyUndirectedGraph<E> implements UndirectedGraph<E> {
         boolean found = false;
         int baconNumber = 0;
         UndirectedGraphNode<E> startNode = getNode(start);
-        UndirectedGraphNode<E> endNode = getNode(end);
+        UndirectedGraphNode<E> endNode = getNode(end);      //this will be Kevin by standard. Optimized as start could be actor with very few roles.
 
-         if (startNode == endNode) {
+         if (startNode == endNode) {                        //Check that we are looking for two different actors.
             long endTime = System.currentTimeMillis();
             System.out.println("BFS:  "+(endTime - startTime) + " ms");
             return baconNumber;
         } else {
-            Set<UndirectedGraphNode<E>> toSearch = new HashSet<>(startNode.getConnectedNodes());
+            Set<UndirectedGraphNode<E>> toSearch = new HashSet<>(startNode.getConnectedNodes());   //Set nodes to be searched to the startNodes connected Nodes.
             Set<UndirectedGraphNode<E>> tempSet = new HashSet<>();
             Set<UndirectedGraphNode<E>> allCheckedNodes = new HashSet<>();
+            allCheckedNodes.add(startNode);
 
             while (!found) {
                 if (toSearch.contains(endNode)) {
                     found = true;
                 } else {
-                    for (UndirectedGraphNode<E> tempNode : toSearch) {
-                        tempSet.addAll(tempNode.getConnectedNodes());
+                    for (UndirectedGraphNode<E> tempNode : toSearch) {                      //Adds all nodes that are connected to the nodes in toSearch
+                        tempSet.addAll(tempNode.getConnectedNodes());                       // to the tempSet  HashSet
                     }
-                    //Optimering  //TODO: could skip tempset.removeALL first 2 or 3 runs
-                    tempSet.removeAll(allCheckedNodes);
-                    allCheckedNodes.addAll(tempSet);
+
+                    allCheckedNodes.addAll(toSearch);                                       //Add the checked nodes from toSearch to allCheckedNodes.
+                    tempSet.removeAll(allCheckedNodes);                                     //Delete all previously nodes fro tempSet
 
                     toSearch = tempSet;
                     tempSet = new HashSet<>();
+
                 }
                 baconNumber++;
-            }
-
+                if (System.currentTimeMillis() - startTime > 30000) return -1;              //This prevents an endless loop if there is no link.
+            }                                                                               // Test this with  Macaroni, Anna
         }
+
         long endTime = System.currentTimeMillis();
         System.out.println("BFS:  "+(endTime - startTime) + " ms");
-        return baconNumber;       //TODO: this list only contains Kevin Bacon number.
+        return baconNumber;
     }
 
     public boolean addCredit(E node1, String production) {

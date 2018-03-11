@@ -1,3 +1,4 @@
+/*
 package alda.graph;// Ändra inte på paketet
 
 import static org.junit.Assert.*;
@@ -36,13 +37,15 @@ public class UndirectedGraphTest {
 		assertTrue(graph.add("K"));
 	}
 
-	/*
+	*/
+/*
 	@Test
 	public void testTooLowWeight() {
 		addExampleNodes();
 		assertFalse(graph.connect("A", "B", 0));
 		assertFalse(graph.connect("C", "D", -1));
-	}*/
+	}*//*
+
 
 	// Nedanstående kod är skriven i ett format för att beskriva grafer som
 	// heter dot och kan användas om ni vill ha en bild av den graf som
@@ -143,3 +146,4 @@ public class UndirectedGraphTest {
 	}
 
 }
+*/

@@ -7,13 +7,13 @@ import java.util.Set;
 
 public class GraphBuilder {
     private MyUndirectedGraph<String> graph;
-    private HashMap<String, HashSet<String>> creditMap;
+    private HashMap<String, HashSet<String>> creditMap; //The string is the production. The HashSet contains unique actors names as strings.
 
     public void buildGraph(MyUndirectedGraph graph) {
-        long startTime = System.currentTimeMillis();
-        creditMap = new HashMap<>();
+        long startTime = System.currentTimeMillis();   //Timer start
+        creditMap = new HashMap<>();                   //Key: credit/production   Value: HashSet actors
         this.graph = graph;
-        parseFileToNodesAndMap();
+        parseFileToNodesAndMap();                      //Parses file to create: all actor nodes in the graph, populates the creditMap and adds the credit to each actor node.
         connectAllNodes();
         long endTime = System.currentTimeMillis();
         System.out.println("Graph build time: "+(endTime - startTime) + " ms");
@@ -81,20 +81,15 @@ public class GraphBuilder {
 
     private void connectAllNodes() {
         HashSet<String> credits;                                                    //Note: A Node can not Link itself.
-        for (UndirectedGraphNode<String> actorNode : graph.getAllNodes()) {         //For every Actor Node
+        for (UndirectedGraphNode<String> actorNode : graph.getAllNodes()) {         //For every Actor Node in the Graph
             credits = new HashSet<>(actorNode.getCredits());                        //Get the  Actor Node credit Set
-            for (String credit : credits) {                                         //For every Actor Note Credit in Set
-                for (String actor : creditMap.get(credit)) {                         //Iterate through Central Credits Map that contains List of Actors
+            for (String credit : credits) {                                         //For every Actor Node Credit in Set
+                for (String actor : creditMap.get(credit)) {                         //Iterate through Central Credits Map that contains List of Actors for that credit
                     graph.connectNodes(actorNode, graph.getNode(actor));             //Link Actor Node to All Actor Nodes sharing same Credit
                 }
             }
         }
     }
 
-//CreditMap skall tas bort?
-/*    @Override
-    public String toString() {
-        return creditMap.toString();
-    }*/
 
 }

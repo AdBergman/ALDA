@@ -14,9 +14,8 @@ public class Kevin6Degree {
     private void go() {
         System.out.println("Kevin Bacon Program");
         System.out.println(" -----Loading----- ");
-
         gb.buildGraph(graph);
-        gb = new GraphBuilder();                //This should allow GarbageCollector to free up some memory.
+        gb = new GraphBuilder();                //This should allow GarbageCollector to free up some memory by deleting creditMap.
         System.out.println(graph);
         menu();
     }
@@ -84,7 +83,7 @@ public class Kevin6Degree {
     private void findKevinBaconNumber(String actorName) {
 
         if (graph.contains(actorName)) {
-            System.out.println("Kevin Bacon-number for " + actorName + " is: " + graph.breadthFirstSearch(actorName, "Bacon, Kevin"));
+            printBaconNumber(actorName, "Bacon, Kevin");
         } else {
             System.out.println("Did not find " + actorName);
         }
@@ -96,8 +95,16 @@ public class Kevin6Degree {
         } else if (!graph.contains(secondActorName)) {
             System.out.println("Did not find " + secondActorName + " in the actor list");
         } else {
-            System.out.println("Kevin Bacon-number for " + firstActorName + " to " + secondActorName + " is: " + graph.breadthFirstSearch(firstActorName, secondActorName));
+            printBaconNumber(firstActorName, secondActorName);
+        }
+    }
 
+    private void printBaconNumber(String firstActorName, String secondActorName){
+        int kevinBaconNumber = graph.breadthFirstSearch(firstActorName, secondActorName);
+        if (kevinBaconNumber == -1){
+            System.out.println("No link found between " + firstActorName + " and " + secondActorName);
+        } else {
+            System.out.println("Kevin Bacon-number for " + firstActorName + " to " + secondActorName + " is: " + kevinBaconNumber);
         }
     }
 }
