@@ -2,6 +2,13 @@ package alda.graph;
 
 import java.util.*;
 
+/**
+ * @author Adrian Bergman adbe0777 bergman.adrian@gmail.com
+ * @author Sebastian Backstrom Pino sebc5325 s.backstrompino@gmail.com
+ * @author Martin Senden mase4691 martin.senden@gmail.com
+ * @since 2018-01-19
+ */
+
 public class MyUndirectedGraph<E> implements UndirectedGraph<E> {
     private int totalEdges = 0;
     private Map<E, UndirectedGraphNode<E>> mapOfNodes = new HashMap<>();
